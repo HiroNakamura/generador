@@ -18,13 +18,19 @@ import java.util.List;
  */
 @Controller
 public class GeneradorController  implements GeneradorResource{
-
+    /**
+     * Variable tipo Logger.
+     */
     @Inject
     private Logger myLogger;
-
+    /**
+     * Variable para inyectar servicio.
+     */
     @Inject
     private ModeradorService moderadorService;
-
+    /**
+     * Variable para leer contenido del application.yml.
+     */
     @Value("${micronaut.application.name}")
     private String nombreAplicacion;
     
@@ -36,7 +42,7 @@ public class GeneradorController  implements GeneradorResource{
 
     @Override
     public HttpResponse<Moderador> crearModerador(@Body Moderador moderador){
-        this.myLogger.log("Generado: "+moderador);
+        this.myLogger.log("Generado: "+moderador.toString());
         this.myLogger.log("Se ejecuta metodo \"crearModerador\"");
         return HttpResponse.created(this.moderadorService.create(moderador));
     }

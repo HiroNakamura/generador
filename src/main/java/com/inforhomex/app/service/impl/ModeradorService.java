@@ -2,15 +2,18 @@ package com.inforhomex.app.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.inforhomex.app.model.Moderador;
 import com.inforhomex.app.service.IGenerador;
-
 import jakarta.inject.Singleton;
 
+/**
+ * Clase Service para las operaciones CRUD.
+ */
 @Singleton
 public class ModeradorService implements IGenerador<Moderador>{
-
+    /**
+     * Lista de Moderadores.
+     */
     private List<Moderador> moderadores = new ArrayList<>();
 
     @Override
