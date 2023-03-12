@@ -6,6 +6,9 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.inject.Singleton;
 
+/**
+ * Clase que implementa la interface Logger.
+ */
 @Singleton
 public class ConsoleLogger implements Logger{
     
