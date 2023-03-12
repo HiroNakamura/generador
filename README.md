@@ -18,6 +18,11 @@ Proyecto Java hecho con Micronaut
 
 ```
 
+**Usando CURL**
+```bash
+curl -X POST -i http://localhost:8080/v1/moderador --data '{"id":1,"nombre":"Fernando","clave":""}'
+```
+
 ## Micronaut 3.8.6 Documentation
 - [User Guide](https://docs.micronaut.io/3.8.6/guide/index.html)
 - [API Reference](https://docs.micronaut.io/3.8.6/api/index.html)

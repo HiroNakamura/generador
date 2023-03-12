@@ -24,4 +24,25 @@ public class ModeradorService implements IGenerador<Moderador>{
     public List<Moderador> getList(){
         return this.moderadores;
     }
+
+    @Override
+    public Moderador get(int id){
+        return this.moderadores.stream().filter(moderador -> moderador.id == id)
+        .findFirst().orElse(null);
+    }
+
+    @Override
+    public void delete(int id){
+        Moderador borrar = this.get(id);
+        this.moderadores.remove(borrar);
+    } 
+
+    @Override
+    public Moderador  update(Moderador moderador, int id){
+        Moderador obtener = this.get(id);
+        obtener.id = moderador.id;
+        obtener.nombre = moderador.nombre;
+        obtener.clave = moderador.clave;
+        return obtener;
+    }
 }

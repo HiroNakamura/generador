@@ -6,8 +6,10 @@ import com.inforhomex.app.service.Logger;
 import com.inforhomex.app.service.impl.ModeradorService;
 
 import io.micronaut.http.annotation.Body;
+import io.micronaut.context.annotation.Value;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.PathVariable;
 import jakarta.inject.Inject;
 import java.util.List;
 
@@ -22,11 +24,14 @@ public class GeneradorController  implements GeneradorResource{
 
     @Inject
     private ModeradorService moderadorService;
+
+    @Value("${micronaut.application.name}")
+    private String nombreAplicacion;
     
     @Override
     public String getSaludo(){
-        this.myLogger.log("Se ejecuta el metodo \"getSaludo()\"");
-        return "¡Hola, mundo en Micronaut!";
+        this.myLogger.log("Se ejecuta el metodo \"getSaludo\"");
+        return "¡Hola, mundo en Micronaut, nombre de la aplicación: ".concat(nombreAplicacion);
     }
 
     @Override
@@ -40,5 +45,23 @@ public class GeneradorController  implements GeneradorResource{
     public HttpResponse<List<Moderador>> listaModeradores(){
         this.myLogger.log("Se ejecuta metodo \"listaModeradores\"");
         return HttpResponse.ok(this.moderadorService.getList());
+    }
+
+    @Override
+    public HttpResponse<Moderador> obtenerModerador(@PathVariable int id){
+        this.myLogger.log("Se ejecuta metodo \"obtenerModerador\"");
+        return HttpResponse.ok(this.moderadorService.get(id));
+    }
+
+    @Override
+    public void eliminarModerador(@PathVariable int id){
+        this.myLogger.log("Se ejecuta metodo \"eliminarModerador\"");
+        this.moderadorService.delete(id);
+    }
+
+    @Override
+    public HttpResponse<Moderador> actualizarModerador(@PathVariable int id, @Body Moderador moderador){
+        this.myLogger.log("Se ejecuta metodo \"actualizarModerador\"");
+        return HttpResponse.created(this.moderadorService.update(moderador, id));
     }
 }
